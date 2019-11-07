@@ -14,6 +14,10 @@ router.get('/', async (req,res) => {
     }
 })
 
+router.get('/:id', [validateRecipeId], (req,res)=>{
+    res.json(req.recipes)
+})
+
 router.get('/:id/shoppingList', [validateRecipeId], async (req,res) => {
     try{
         const id = req.params.id;
