@@ -26,6 +26,17 @@ router.get('/:id/shoppingList', [validateRecipeId], async (req,res) => {
     
 })
 
+router.get('/:id/instructions', [validateRecipeId], async (req,res) => {
+    try{
+        const id = req.params.id;
+        let response = await Recipes.getInstructions(id)
+        res.status(200).json(response)
+    }
+    catch (error){
+        res.status(500).json({error: 'Instructions could not be retrieved from DB'})
+    }
+})
+
 function validateRecipeId(req,res,next){
     const id = req.params.id;
     if (parseInt(id) > 0){
